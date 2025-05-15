@@ -4,6 +4,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("todotxt", help="location of todo.txt file")
 parser.add_argument("-i", "--ignore", help="projects to ignore", nargs="*")
 args = parser.parse_args()
+if not args.ignore:
+	args.ignore = []
 
 todotxt = pytodotxt.TodoTxt(args.todotxt)
 todotxt.parse()
