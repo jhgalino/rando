@@ -35,7 +35,7 @@ tasks_per_project = {
     for project in projects
 }
 
-# get only projects with non-completed tasks
+# get only projects with tasks
 tasks_per_project = {
     project: tasks for project, tasks in tasks_per_project.items() if len(tasks) != 0
 }
@@ -43,7 +43,7 @@ tasks_per_project = {
 if len(tasks_per_project) == 0:
 	raise Exception("All tasks are currently completed. No task can be given.")
 
-chosen_project = random.choice(list(projects))
+chosen_project = random.choice(list(tasks_per_project.keys()))
 tasks = tasks_per_project[chosen_project]
 
 print(random.choice(tasks))
