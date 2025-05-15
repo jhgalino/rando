@@ -33,7 +33,7 @@ tasks_per_project = {
 
 # get only projects with non-completed tasks
 tasks_per_project = {
-    project: tasks for project, tasks in tasks_per_project if len(tasks) != 0
+    project: tasks for project, tasks in tasks_per_project.items() if len(tasks) != 0
 }
 
 if len(tasks_per_project) == 0:
