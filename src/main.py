@@ -8,6 +8,9 @@ args = parser.parse_args()
 todotxt = pytodotxt.TodoTxt(args.todotxt)
 todotxt.parse()
 
+# get the set of all projects not being ignored.
+# a task can have multiple projects, thus we need to iterate over all tasks in
+# the todotxt file to get all projects
 projects = set(
     project
     for task in todotxt.tasks
@@ -15,26 +18,26 @@ projects = set(
     if project not in args.ignore
 )
 
-num_tasks_in_projects = [
-    len(
-        [
-            task
-            for task in todotxt.tasks
-            if project in task.projects and not task.is_completed
-        ]
-    )
-    for project in projects
-]
-if all(num == 0 for num in num_tasks_in_projects):
-    raise Exception("All tasks are currently ignored.")
-
-tasks_under_project = []
-while len(tasks_under_project) == 0:
-    chosen_project = random.choice(list(projects))
-    tasks_under_project = [
+# create a dictionary with each non-ignored project as key and a list of tasks
+# associated with it as the value
+tasks_per_project = {
+    project: [
         task
         for task in todotxt.tasks
-        if chosen_project in task.projects and not task.is_completed
+        if project in task.projects and not task.is_completed
     ]
+    for project in projects
+}
 
-print(random.choice(tasks_under_project))
+# get only projects with non-completed tasks
+tasks_per_project = {
+    project: tasks for project, tasks in tasks_per_project if len(tasks) != 0
+}
+
+if len(tasks_per_project) == 0:
+	raise Exception("All tasks are currently completed. No task can be given.")
+
+chosen_project = random.choice(list(projects))
+tasks = tasks_per_project[chosen_project]
+
+print(random.choice(tasks))
