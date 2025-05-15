@@ -25,7 +25,6 @@ num_tasks_in_projects = [
     )
     for project in projects
 ]
-print(num_tasks_in_projects)
 if all(num == 0 for num in num_tasks_in_projects):
     raise Exception("All tasks are currently ignored.")
 
