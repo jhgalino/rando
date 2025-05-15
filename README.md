@@ -1,6 +1,6 @@
 # rando
 
-A small Python script to randomly select a task from a todo.txt
+A small Python script to randomly select a task from a [todo.txt](http://todotxt.org/)
 
 ## Installation
 
