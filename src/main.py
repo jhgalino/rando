@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import pytodotxt, argparse, random
+import pytodotxt, argparse, random, time
 
 parser = argparse.ArgumentParser()
 parser.add_argument("todotxt", help="location of todo.txt file")
@@ -45,5 +45,7 @@ if len(tasks_per_project) == 0:
 
 chosen_project = random.choice(list(tasks_per_project.keys()))
 tasks = tasks_per_project[chosen_project]
+
+random.seed = time.time()
 
 print(random.choice(tasks))
