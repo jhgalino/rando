@@ -1,2 +1,0 @@
-pytodotxt==3.0.0
-pyinstaller
